@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from users.models import User
 from users.serializers import UserInfoSerializer, UserTeamMemberSerializer
 from zq_django_util.exceptions import ApiException
