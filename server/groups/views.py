@@ -21,12 +21,6 @@ class GroupView(viewsets.ModelViewSet):
         else:
             return super().get_queryset()
 
-    def get_serializer_class(self):
-        if self.action == "retrieve":
-            return UserInfoSerializer
-        else:
-            return super().get_serializer_class()
-
     def list(self, request, *args, **kwargs):
         """
         获取社团信息
