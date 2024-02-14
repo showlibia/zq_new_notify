@@ -27,17 +27,9 @@ class GroupView(viewsets.ModelViewSet):
         else:
             return super().get_serializer_class()
 
-    def get_permissions(self, pk=None):
-        if self.action == "retrieve" or self.action == "list":
-            return [AllowAny()]
-        elif pk is not None and self.request.user == self.get_object():
-            return super().get_permissions()
-        else:
-            return [IsAdminUser()]
-
     def list(self, request, *args, **kwargs):
         """
-        获取自己信息
+        获取社团信息
         """
         queryset = self.get_queryset().first()
         serializer = self.get_serializer(queryset)
