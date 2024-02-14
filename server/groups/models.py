@@ -21,7 +21,7 @@ class Group(models.Model):
         if member in self.members:
             self.members.remove(member)
         else:
-            print("未发现此成员。")
+            print("未发现此成员")
 
 class Notification(models.Model):
     """
