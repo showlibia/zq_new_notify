@@ -1,5 +1,4 @@
 from rest_framework import routers
-
 from groups.views import GroupView
 
 urlpatterns = []
