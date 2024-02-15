@@ -1,8 +1,8 @@
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from groups.models import Group
+from django.contrib.auth.models import AbstractUser
 
-class User(models.Model):
+class User(AbstractUser):
     """
     基本用户表
     """
@@ -39,12 +39,14 @@ class User(models.Model):
         max_length=64,
         unique=True,
         null=True,
-        verbose_name="微信openid")
+        verbose_name="微信openid"
+    )
     union_id = models.UUIDField(
         unique=True,
         null=True,
         blank=True,
-        verbose_name="自强union_id")
+        verbose_name="自强union_id"
+    )
 
     class Meta:
         app_label = "users"
