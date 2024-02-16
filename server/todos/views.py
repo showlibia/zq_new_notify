@@ -29,6 +29,5 @@ def todo_complete(request, todo_id):
 def delete_todo(request,todo_id):
     Todo.objects.get(pk=todo_id).delete()
     return redirect("todo_list")
-
-
+  
 # Create your views here.
