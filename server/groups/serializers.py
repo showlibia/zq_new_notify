@@ -80,6 +80,12 @@ class GroupInfoSerializer(serializers.ModelSerializer):
         ]
 
 
+class NotificationReceiverSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NotificationReceiver
+        fields = '__all__'
+
+
 class NotificationSerializer(serializers.ModelSerializer):
     publisher = serializers.PrimaryKeyRelatedField(
         related_name="publisher",
@@ -87,3 +93,13 @@ class NotificationSerializer(serializers.ModelSerializer):
     )
 
     content = serializers.CharField(label="通知内容")
+
+    receive = serializers.BooleanField(
+        label="是否收到",
+    )
+
+    receivers = NotificationReceiverSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Notification
+        fields = '__all__'
