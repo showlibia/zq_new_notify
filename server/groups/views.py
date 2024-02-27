@@ -99,5 +99,25 @@ class GroupView(viewsets.ModelViewSet):
         # 返回成功响应
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+@api_view(['POST'])
+    def confirm_notification_received(self, request, notification_id):
+        try:
+            notification = Notification.objects.get(pk=notification_id)
+        except Notification.DoesNotExist:
+            return Response({"error": "Notification not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        user = request.user
+
+        try:
+            receiver = NotificationReceiver.objects.get(notification=notification, user=user)
+        except NotificationReceiver.DoesNotExist:
+            return Response({"error": "Receiver not found"}, status=status.HTTP_404_NOT_FOUND)
+
+        receiver.received = True
+        receiver.save()
+
+        serializer = NotificationSerializer(notification)
+        return Response(serializer.data)
+
 
 # Create your views here.
