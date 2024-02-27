@@ -45,6 +45,31 @@ class Notification(models.Model):
     def __str__(self):
         return f"{self.content}"
 
+class NotificationReceiver(models.Model):
+    """
+    通知接收
+    """
+    notification = models.ForeignKey(
+        Notification,
+        on_delete=models.CASCADE,
+        related_name="receivers",
+        verbose_name="通知",
+    )
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="received_notifications",
+        verbose_name="接收者",
+    )
+
+    received = models.BooleanField(verbose_name="是否已收到", default=False)
+
+    class Meta:
+        app_label = "groups"
+        db_table = "zq_notify_receiver"
+        verbose_name = "通知接收者"
+        verbose_name_plural = verbose_name
 
 class Attendance(models.Model):
     """
